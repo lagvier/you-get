@@ -2,7 +2,7 @@
 
 [You-Get](https://you-get.org/) is a tiny command-line utility to download media contents (videos, audios, images) from the Web, in case there is no other handy way to do it.
 
-I've forked this repo to incorporate support for KissAnime, which the main repo may or may not support as it includes third-party modules.
+I've forked this repo to incorporate support for KissAnime, which the main repo may or may not support as it includes third-party modules, as well as the ability to download a whole range of episodes concurrently through the use of multiprocessing.
 
 Here's how you use `you-get` to download a video from [this web page](https://kissanime.to/Anime/Koutetsujou-no-Cabaneli/episode-001?id=124532):
 
@@ -14,6 +14,24 @@ Type:       MPEG-4 video (video/mp4)
 Size:       263.24 MiB (276022452 Bytes)
 Downloading Kabaneri of the Iron Fortress Episode 001.mp4 ...
 100.0% ( 263.2/263.2MB) ├████████████████████████████████████████┤[1/1] 420 kB/s
+```
+
+And for a range:
+```console
+$ you-get -F 1-2 'https://kissanime.to/Anime/Koutetsujou-no-Cabaneli/'
+Site:       KissAnime.to
+Title:      Kabaneri of the Iron Fortress Episode 001
+Type:       MPEG-4 video (video/mp4)
+Size:       263.24 MiB (276022452 Bytes)
+Downloading Kabaneri of the Iron Fortress Episode 001.mp4 ...
+34.8% ( 91.5/263.2MB) ├████████████████────────────────────────┤[1/1]    5 MB/s
+
+Site:       KissAnime.to
+Title:      Kabaneri of the Iron Fortress _Preview
+Type:       MPEG-4 video (video/mp4)
+Size:       33.32 MiB (34935362 Bytes)
+Downloading Kabaneri of the Iron Fortress _Preview.mp4 ...
+100.0% ( 33.3/ 33.3MB) ├████████████████████████████████████████┤[1/1] 420 kB/s
 ```
 
 And here's why you might want to use it:
@@ -273,6 +291,7 @@ Use `--url`/`-u` to get a list of downloadable resource URLs extracted from the 
 
 | Site | URL | Videos? | Images? | Audios? |
 | :--: | :-- | :-----: | :-----: | :-----: |
+| **KissAnime** | <https://kissanime.to/> |✓| | |
 | **YouTube** | <https://www.youtube.com/>    |✓| | |
 | **Twitter** | <https://twitter.com/>        |✓|✓| |
 | VK          | <http://vk.com/>              |✓| | |
@@ -292,7 +311,6 @@ Use `--url`/`-u` to get a list of downloadable resource URLs extracted from the 
 | Magisto     | <http://www.magisto.com/>     |✓| | |
 | Khan Academy | <https://www.khanacademy.org/> |✓| | |
 | JPopsuki TV | <http://www.jpopsuki.tv/>     |✓| | |
-| **KissAnime** | <https://kissanime.to/> |✓| | |
 | Internet Archive | <https://archive.org/>   |✓| | |
 | **Instagram** | <https://instagram.com/>    |✓|✓| |
 | InfoQ       | <http://www.infoq.com/presentations/> |✓| | |
