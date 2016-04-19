@@ -1,22 +1,19 @@
 # You-Get
 
-[![PyPI version](https://badge.fury.io/py/you-get.png)](http://badge.fury.io/py/you-get)
-[![Build Status](https://api.travis-ci.org/soimort/you-get.png)](https://travis-ci.org/soimort/you-get)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/soimort/you-get?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [You-Get](https://you-get.org/) is a tiny command-line utility to download media contents (videos, audios, images) from the Web, in case there is no other handy way to do it.
 
-Here's how you use `you-get` to download a video from [this web page](http://www.fsf.org/blogs/rms/20140407-geneva-tedx-talk-free-software-free-society):
+I've forked this repo to incorporate support for KissAnime, which the main repo may or may not support as it includes third-party modules.
+
+Here's how you use `you-get` to download a video from [this web page](https://kissanime.to/Anime/Koutetsujou-no-Cabaneli/episode-001?id=124532):
 
 ```console
-$ you-get http://www.fsf.org/blogs/rms/20140407-geneva-tedx-talk-free-software-free-society
-Site:       fsf.org
-Title:      TEDxGE2014_Stallman05_LQ
-Type:       WebM video (video/webm)
-Size:       27.12 MiB (28435804 Bytes)
-
-Downloading TEDxGE2014_Stallman05_LQ.webm ...
-100.0% ( 27.1/27.1 MB) ├████████████████████████████████████████┤[1/1]   12 MB/s
+$ you-get 'https://kissanime.to/Anime/Koutetsujou-no-Cabaneli/episode-001?id=124532'
+Site:       KissAnime.to
+Title:      Kabaneri of the Iron Fortress Episode 001
+Type:       MPEG-4 video (video/mp4)
+Size:       263.24 MiB (276022452 Bytes)
+Downloading Kabaneri of the Iron Fortress Episode 001.mp4 ...
+100.0% ( 263.2/263.2MB) ├████████████████████████████████████████┤[1/1] 420 kB/s
 ```
 
 And here's why you might want to use it:
@@ -49,25 +46,9 @@ The following dependencies are required and must be installed separately, unless
 * **[FFmpeg](https://www.ffmpeg.org/)** (strongly recommended) or [Libav](https://libav.org/)
 * (Optional) [RTMPDump](https://rtmpdump.mplayerhq.hu/)
 
-### Option 1: Install via pip
+### Option 1: Download from GitHub
 
-The official release of `you-get` is distributed on [PyPI](https://pypi.python.org/pypi/you-get), and can be installed easily from a PyPI mirror via the [pip](https://en.wikipedia.org/wiki/Pip_\(package_manager\)) package manager. Note that you must use the Python 3 version of `pip`:
-
-    $ pip3 install you-get
-
-### Option 2: Install via [Antigen](https://github.com/zsh-users/antigen)
-
-Add the following line to your `.zshrc`:
-
-    antigen bundle soimort/you-get
-
-### Option 3: Use a pre-built package (Windows only)
-
-Download the `exe` (standalone) or `7z` (all dependencies included) from: <https://github.com/soimort/you-get/releases/latest>.
-
-### Option 4: Download from GitHub
-
-You may either download the [stable](https://github.com/soimort/you-get/archive/master.zip) (identical with the latest release on PyPI) or the [develop](https://github.com/soimort/you-get/archive/develop.zip) (more hotfixes, unstable features) branch of `you-get`. Unzip it, and put the directory containing the `you-get` script into your `PATH`.
+You should download this [branch] (https://github.com/soimort/you-get/archive/develop.zip) (develop) of `you-get`. Unzip it, and put the directory containing the `you-get` script into your `PATH`.
 
 Alternatively, run
 
@@ -83,28 +64,22 @@ $ python3 setup.py install --user
 
 to install `you-get` to a permanent path.
 
-### Option 5: Git clone
+### Option 2: Git clone
 
 This is the recommended way for all developers, even if you don't often code in Python.
 
 ```
-$ git clone git://github.com/soimort/you-get.git
+$ git clone git://github.com/myh1000/you-get.git
 ```
 
 Then put the cloned directory into your `PATH`, or run `./setup.py install` to install `you-get` to a permanent path.
 
 ## Upgrading
 
-Based on which option you chose to install `you-get`, you may upgrade it via:
+You may upgrade it by downloading the latest release via:
 
 ```
-$ pip3 install --upgrade you-get
-```
-
-or download the latest release via:
-
-```
-$ you-get https://github.com/soimort/you-get/archive/master.zip
+$ you-get https://github.com/myh1000/you-get/archive/develop.zip
 ```
 
 ## Getting Started
@@ -317,6 +292,7 @@ Use `--url`/`-u` to get a list of downloadable resource URLs extracted from the 
 | Magisto     | <http://www.magisto.com/>     |✓| | |
 | Khan Academy | <https://www.khanacademy.org/> |✓| | |
 | JPopsuki TV | <http://www.jpopsuki.tv/>     |✓| | |
+| **KissAnime** | <https://kissanime.to/> |✓| | |
 | Internet Archive | <https://archive.org/>   |✓| | |
 | **Instagram** | <https://instagram.com/>    |✓|✓| |
 | InfoQ       | <http://www.infoq.com/presentations/> |✓| | |
@@ -395,7 +371,7 @@ All kinds of pull requests are welcome. However, there are a few guidelines to f
 
 ## Legal Issues
 
-This software is distributed under the [MIT license](https://raw.github.com/soimort/you-get/master/LICENSE.txt).
+This software is distributed under the [MIT license](https://raw.github.com/myh1000/you-get/master/LICENSE.txt).
 
 In particular, please be aware that
 
@@ -416,5 +392,7 @@ We only ship the code here, and how you are going to use it is left to your own 
 ## Authors
 
 Made by [@soimort](https://github.com/soimort), who is in turn powered by :coffee:, :pizza: and :ramen:.
+
+Forked and made better by [@myh1000](https://github.com/myh1000) :ok_hand: :fire: :ok_hand: :fire: :ok_hand:
 
 You can find the [list of all contributors](https://github.com/soimort/you-get/graphs/contributors) here.
