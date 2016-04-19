@@ -48,7 +48,7 @@ The following dependencies are required and must be installed separately, unless
 
 ### Option 1: Download from GitHub
 
-You should download this [branch] (https://github.com/soimort/you-get/archive/develop.zip) (develop) of `you-get`. Unzip it, and put the directory containing the `you-get` script into your `PATH`.
+You should download this [branch] (https://github.com/myh1000/you-get/archive/develop.zip) (develop) of `you-get`. Unzip it, and put the directory containing the `you-get` script into your `PATH`.
 
 Alternatively, run
 
