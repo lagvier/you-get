@@ -87,6 +87,6 @@ def kissanime_url(html):
     return url_list
 
 
-site_info = "KissAnime.com"
+site_info = "KissAnime.to"
 download = kissanime_download
 download_playlist = kissanime_download_playlist

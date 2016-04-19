@@ -15,7 +15,7 @@ SITES = {
     'dilidili'         : 'dilidili',
     'dongting'         : 'dongting',
     'douban'           : 'douban',
-    'douyutv'          : 'douyutv',
+    'douyu'            : 'douyutv',
     'ehow'             : 'ehow',
     'facebook'         : 'facebook',
     'fc2'              : 'fc2video',
@@ -1255,7 +1255,7 @@ def url_to_module(url):
     else:
         import http.client
         conn = http.client.HTTPConnection(video_host)
-        conn.request("HEAD", video_url)
+        conn.request("HEAD", video_url, headers=fake_headers)
         res = conn.getresponse()
         location = res.getheader('location')
         if location and location != url and not location.startswith('/'):
