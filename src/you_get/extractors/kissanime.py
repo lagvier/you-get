@@ -5,8 +5,16 @@ from ..common import *
 import cfscrape
 import base64
 from multiprocessing import Process
+import itertools, sys
 
 scraper = cfscrape.create_scraper()
+spinner = itertools.cycle(['-', '/', '|', '\\'])
+
+def toggle(num):
+    while num > 0:
+        sys.stdout.write(next(spinner))  # write the next character
+        sys.stdout.flush()               # flush stdout buffer (actual character display)
+        sys.stdout.write('\b')           # erase the last written char
 
 def get_title(html):
     btitle = re.search(b'<title>(.*)</title>', html, flags=re.DOTALL).group(1)
@@ -15,7 +23,11 @@ def get_title(html):
     return title
 
 def kissanime_download(url, output_dir='.', merge=True, info_only=False, **kwargs):
+    p = Process(target = toggle, args=(1,))
+    p.start()
     html = scraper.get(url).content
+    p.terminate()
+    sys.stdout.write('\b')
     if "id=" not in url.lower():
         kissanime_download_playlist(html, output_dir, merge, info_only, **kwargs)
     else:
