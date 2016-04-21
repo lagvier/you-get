@@ -83,7 +83,7 @@ def kissanime_download_playlist(html, output_dir='.', merge=True, info_only=Fals
                 if not info_only:
                     if x == int(stream_id_range[2]):
                         print("The download bar may look weird, but its fine. The console is just trying to update the same progress bar for multiple downloads.")
-                    else:
+                    elif x == int(stream_id_range[0]):
                         print("The download bar may look weird, but its fine.")
                     p = Process(target = download_urls, args=([url], title, ext, size, output_dir, merge))
                     p.start()
