@@ -13,7 +13,7 @@ Title:      Kabaneri of the Iron Fortress Episode 001
 Type:       MPEG-4 video (video/mp4)
 Size:       263.24 MiB (276022452 Bytes)
 Downloading Kabaneri of the Iron Fortress Episode 001.mp4 ...
-100.0% ( 263.2/263.2MB) ├████████████████████████████████████████┤[1/1] 420 kB/s
+100.0% ( 263.2/263.2MB) ├████████████████████████████████████████┤[1/1] 946 kB/s
 ```
 
 And for a range:
