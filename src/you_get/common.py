@@ -1240,9 +1240,12 @@ def url_to_module(url):
         video_url = r1(r'https?://[^/]+(.*)', url)
         assert video_host and video_url
     except:
-        url = google_search(url)
-        video_host = r1(r'https?://([^/]+)/', url)
-        video_url = r1(r'https?://[^/]+(.*)', url)
+        if url.find("kissanime") >= 0:
+            video_host = "kissanime.to"
+        else:
+            url = google_search(url)
+            video_host = r1(r'https?://([^/]+)/', url)
+            video_url = r1(r'https?://[^/]+(.*)', url)
 
     if video_host.endswith('.com.cn'):
         video_host = video_host[:-3]
