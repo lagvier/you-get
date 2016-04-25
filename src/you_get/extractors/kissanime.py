@@ -84,7 +84,7 @@ def kissanime_download_playlist(html, search=False, output_dir='.', merge=True, 
             title = get_title(html)
             type, ext, size = url_info(url, faker=True)
             print_info(site_info, title, type, size)
-        input_var = input("Which episode(s) did you want to get: ")
+        input_var = input("Which episode(s) do you want to get: ")
         if "-" not in input_var:
             stream_id = int(input_var)
             if stream_id > len(links) or int(stream_id) <= 0:
@@ -178,7 +178,7 @@ def kissanime_download_search(html, output_dir='.', merge=True, info_only=False,
             print(str(idx+1) + '. ' + url)
         else:
             print('10+ items not listed.')
-    input_var = input("Which anime did you want to get: ")
+    input_var = input("Which anime do you want to get: ")
     if "-" not in input_var:
         stream_id = int(input_var)
         if stream_id > len(url_list) or int(stream_id) <= 0:
