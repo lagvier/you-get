@@ -171,28 +171,31 @@ def kissanime_download_search(html, output_dir='.', merge=True, info_only=False,
     playlist = re.sub( '\s+', ' ', (re.search(b'<table class="listing">(.*)</table>', html, flags=re.DOTALL).group(1).decode('UTF-8'))).strip()
     links = re.findall(u'<a href="([^."]+)', playlist)
     url_list = []
-    for idx, link in enumerate(links):
-        if (idx < 10):
-            url = 'https://kissanime.to' + link
-            url_list.append(url)
-            print(str(idx+1) + '. ' + url)
+    if 'id=' not in links[0].lower():
+        for idx, link in enumerate(links):
+            if (idx < 10):
+                url = 'https://kissanime.to' + link
+                url_list.append(url)
+                print(str(idx+1) + '. ' + url)
+            else:
+                print('10+ items not listed.')
+        input_var = input("Which anime do you want to get: ")
+        if "-" not in input_var:
+            stream_id = int(input_var)
+            if stream_id > len(url_list) or int(stream_id) <= 0:
+                log.e('[Error] Invalid format id.')
+                exit(2)
+            kissanime_download(url_list[int(input_var)-1], True, output_dir, merge, info_only, **kwargs)
         else:
-            print('10+ items not listed.')
-    input_var = input("Which anime do you want to get: ")
-    if "-" not in input_var:
-        stream_id = int(input_var)
-        if stream_id > len(url_list) or int(stream_id) <= 0:
-            log.e('[Error] Invalid format id.')
-            exit(2)
-        kissanime_download(url_list[int(input_var)-1], True, output_dir, merge, info_only, **kwargs)
+            stream_id_range = input_var.partition('-')
+            if int(stream_id_range[2]) > len(url_list) or int(stream_id_range[0]) <= 0 or int(stream_id_range[0]) > int(stream_id_range[2]):
+                log.e('[Error] Invalid format id range.')
+                exit(2)
+            for x in range(int(stream_id_range[2]), int(stream_id_range[0])-1, -1):
+                kissanime_download(url_list[int(x)-1], True, output_dir, merge, info_only, **kwargs)
     else:
-        stream_id_range = input_var.partition('-')
-        if int(stream_id_range[2]) > len(url_list) or int(stream_id_range[0]) <= 0 or int(stream_id_range[0]) > int(stream_id_range[2]):
-            log.e('[Error] Invalid format id range.')
-            exit(2)
-        for x in range(int(stream_id_range[2]), int(stream_id_range[0])-1, -1):
-            kissanime_download(url_list[int(x)-1], True, output_dir, merge, info_only, **kwargs)
-
+        url = 'https://kissanime.to/'+ re.search(r'([^/].+)/Episode-', links[0]).group(1)
+        kissanime_download(url, True, output_dir, merge, info_only, **kwargs)
 
 def kissanime_url(html):
     selectQuality = re.search(b'<select id="selectQuality">.*</select>', html).group(0)
