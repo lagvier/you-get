@@ -34,6 +34,14 @@ Downloading Kabaneri of the Iron Fortress _Preview.mp4 ...
 100.0% ( 33.3/ 33.3MB) ├████████████████████████████████████████┤[1/1] 420 kB/s
 ```
 
+You can also search KissAnime by following the format below:
+```console
+$ you-get 'kissanime witch craft'
+1. https://kissanime.to/Anime/Witch-Craft-Works
+2. https://kissanime.to/Anime/Witch-Craft-Works-OVA
+Which anime do you want to get: 
+```
+
 And here's why you might want to use it:
 
 * You enjoyed something on the Internet, and just want to download them for your own pleasure.

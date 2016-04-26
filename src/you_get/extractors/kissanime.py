@@ -79,7 +79,7 @@ def kissanime_download_playlist(html, search=False, output_dir='.', merge=True, 
             url_list.append(url)
             html = scraper.get(url).content
             print('[ '+ str(len(links)-idx) +' ] __________________________________')
-            print('dl-with: you-get --format='+str(len(links)-idx)+' [url]')
+            print('dl-with:    you-get --format='+str(len(links)-idx)+' [url]')
             url = kissanime_url(html)[0]
             title = get_title(html)
             type, ext, size = url_info(url, faker=True)
