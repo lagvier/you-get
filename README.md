@@ -1,6 +1,6 @@
 # You-Get
 
-[You-Get](https://you-get.org/) is a tiny command-line utility to download media contents (videos, audios, images) from the Web, in case there is no other handy way to do it.
+[You-Get](https://you-get.org/) is a tiny command-line utility to download animu from the Web, in case there is no other handy way to do it.
 
 I've forked this repo to incorporate support for KissAnime, which the main repo may or may not support as it includes third-party modules, as well as the ability to download a whole range of episodes concurrently through the use of multiprocessing.
 
