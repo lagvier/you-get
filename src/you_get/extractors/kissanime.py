@@ -179,6 +179,7 @@ def kissanime_download_search(html, output_dir='.', merge=True, info_only=False,
                 print(str(idx+1) + '. ' + url)
             else:
                 print('10+ items not listed.')
+                break
         input_var = input("Which anime do you want to get: ")
         if "-" not in input_var:
             stream_id = int(input_var)
