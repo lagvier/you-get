@@ -173,12 +173,12 @@ def kissanime_download_search(html, output_dir='.', merge=True, info_only=False,
     url_list = []
     if 'id=' not in links[0].lower():
         for idx, link in enumerate(links):
-            if (idx < 10):
+            if (idx < 20):
                 url = 'https://kissanime.to' + link
                 url_list.append(url)
                 print(str(idx+1) + '. ' + url)
             else:
-                print('10+ items not listed.')
+                print('20+ items not listed.')
                 break
         input_var = input("Which anime do you want to get: ")
         if "-" not in input_var:
