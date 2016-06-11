@@ -4,6 +4,8 @@
 
 I've forked this repo to incorporate support for KissAnime, which the main repo may or may not support as it includes third-party modules, as well as the ability to download a whole range of episodes concurrently through the use of multiprocessing.
 
+If there are any errors with the cloudflare-scrape module, please update it with pip.
+
 Here's how you use `you-get` to download a video from [this web page](https://kissanime.to/Anime/Koutetsujou-no-Cabaneli/episode-001?id=124532):
 
 ```console
