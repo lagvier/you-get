@@ -71,7 +71,43 @@ def kissanime_download(url, s=False, output_dir='.', merge=True, info_only=False
 def kissanime_download_playlist(html, search=False, output_dir='.', merge=True, info_only=False, **kwargs):
     playlist = re.sub( '\s+', ' ', (re.search(b'<table class="listing">(.*)</table>', html, flags=re.DOTALL).group(1).decode('UTF-8'))).strip()
     links = re.findall(u'<a href="([^."]+)', playlist)
-    if search:
+    if 'stream_id' in kwargs and kwargs['stream_id']:
+        # Extract the stream
+        if "-" not in kwargs['stream_id']:
+            stream_id = int(kwargs['stream_id'])
+            if stream_id > len(links) or int(stream_id) <= 0:
+                log.e('[Error] Invalid format id.')
+                exit(2)
+            url = 'https://kissanime.to' + links[len(links)-stream_id]
+            html = scraper.get(url).content
+            url = kissanime_url(html)[0]
+            title = get_title(html)
+            type, ext, size = url_info(url, faker=True)
+            print_info(site_info, title, type, size)
+
+            if not info_only:
+                download_urls([url], title, ext, size, output_dir, merge)
+        else:
+            stream_id_range = kwargs['stream_id'].partition('-')
+            if int(stream_id_range[2]) > len(links) or int(stream_id_range[0]) <= 0 or int(stream_id_range[0]) > int(stream_id_range[2]):
+                log.e('[Error] Invalid format id range.')
+                exit(2)
+            for x in range(int(stream_id_range[2]), int(stream_id_range[0])-1, -1):
+                url = 'https://kissanime.to' + links[len(links)-x]
+                html = scraper.get(url).content
+                url = kissanime_url(html)[0]
+                title = get_title(html)
+                type, ext, size = url_info(url, faker=True)
+                print_info(site_info, title, type, size)
+
+                if not info_only:
+                    if x == int(stream_id_range[2]):
+                        print("The download bar may look weird, but its fine. The console is just trying to update the same progress bar for multiple downloads.")
+                    elif x == int(stream_id_range[0]):
+                        print("The download bar may look weird, but its fine.")
+                    p = Process(target = download_urls, args=([url], title, ext, size, output_dir, merge))
+                    p.start()
+    elif search:
         url_list = []
         print()
         for idx, link in enumerate(links):
@@ -120,52 +156,14 @@ def kissanime_download_playlist(html, search=False, output_dir='.', merge=True, 
                     p = Process(target = download_urls, args=([url], title, ext, size, output_dir, merge))
                     p.start()
     else:
-        if 'stream_id' in kwargs and kwargs['stream_id']:
-            # Extract the stream
-            if "-" not in kwargs['stream_id']:
-                stream_id = int(kwargs['stream_id'])
-                if stream_id > len(links) or int(stream_id) <= 0:
-                    log.e('[Error] Invalid format id.')
-                    exit(2)
-                url = 'https://kissanime.to' + links[len(links)-stream_id]
-                html = scraper.get(url).content
-                url = kissanime_url(html)[0]
-                title = get_title(html)
-                type, ext, size = url_info(url, faker=True)
-                print_info(site_info, title, type, size)
-
-                if not info_only:
-                    download_urls([url], title, ext, size, output_dir, merge)
-            else:
-                stream_id_range = kwargs['stream_id'].partition('-')
-                if int(stream_id_range[2]) > len(links) or int(stream_id_range[0]) <= 0 or int(stream_id_range[0]) > int(stream_id_range[2]):
-                    log.e('[Error] Invalid format id range.')
-                    exit(2)
-                for x in range(int(stream_id_range[2]), int(stream_id_range[0])-1, -1):
-                    url = 'https://kissanime.to' + links[len(links)-x]
-                    html = scraper.get(url).content
-                    url = kissanime_url(html)[0]
-                    title = get_title(html)
-                    type, ext, size = url_info(url, faker=True)
-                    print_info(site_info, title, type, size)
-
-                    if not info_only:
-                        if x == int(stream_id_range[2]):
-                            print("The download bar may look weird, but its fine. The console is just trying to update the same progress bar for multiple downloads.")
-                        elif x == int(stream_id_range[0]):
-                            print("The download bar may look weird, but its fine.")
-                        p = Process(target = download_urls, args=([url], title, ext, size, output_dir, merge))
-                        p.start()
-
-        else:
-            for idx, link in enumerate(links):
-                url = 'https://kissanime.to' + link
-                html = scraper.get(url).content
-                print('dl-with:    you-get --format='+str(len(links)-idx)+' [url]')
-                url = kissanime_url(html)[0]
-                title = get_title(html)
-                type, ext, size = url_info(url, faker=True)
-                print_info(site_info, title, type, size)
+        for idx, link in enumerate(links):
+            url = 'https://kissanime.to' + link
+            html = scraper.get(url).content
+            print('dl-with:    you-get --format='+str(len(links)-idx)+' [url]')
+            url = kissanime_url(html)[0]
+            title = get_title(html)
+            type, ext, size = url_info(url, faker=True)
+            print_info(site_info, title, type, size)
 
 def kissanime_download_search(html, output_dir='.', merge=True, info_only=False, **kwargs):
     playlist = re.sub( '\s+', ' ', (re.search(b'<table class="listing">(.*)</table>', html, flags=re.DOTALL).group(1).decode('UTF-8'))).strip()
