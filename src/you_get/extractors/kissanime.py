@@ -38,7 +38,7 @@ def kissanime_download(url,
                        **kwargs):
     if ' ' in url:
         search = url.split(' ', 1)[1]
-        url = ("https://kissanime.to/Search/Anime/" + search)
+        url = ("https://kissanime.ru/Search/Anime/" + search)
         search = True
     else:
         search = False
@@ -104,7 +104,7 @@ def kissanime_download_playlist(html,
             if stream_id > len(links) or int(stream_id) <= 0:
                 log.e('[Error] Invalid format id.')
                 exit(2)
-            url = 'https://kissanime.to' + links[len(links) - stream_id]
+            url = 'https://kissanime.ru' + links[len(links) - stream_id]
             html = scraper.get(url).content
             url = kissanime_url(html)[0]
             title = get_title(html)
@@ -122,7 +122,7 @@ def kissanime_download_playlist(html,
                 exit(2)
             for x in range(
                     int(stream_id_range[2]), int(stream_id_range[0]) - 1, -1):
-                url = 'https://kissanime.to' + links[len(links) - x]
+                url = 'https://kissanime.ru' + links[len(links) - x]
                 html = scraper.get(url).content
                 url = kissanime_url(html)[0]
                 title = get_title(html)
@@ -144,7 +144,7 @@ def kissanime_download_playlist(html,
         url_list = []
         print()
         for idx, link in enumerate(links):
-            url = 'https://kissanime.to' + link
+            url = 'https://kissanime.ru' + link
             url_list.append(url)
             html = scraper.get(url).content
             print('[ ' + str(len(links) - idx) +
@@ -161,7 +161,7 @@ def kissanime_download_playlist(html,
             if stream_id > len(links) or int(stream_id) <= 0:
                 log.e('[Error] Invalid format id.')
                 exit(2)
-            url = 'https://kissanime.to' + links[len(links) - stream_id]
+            url = 'https://kissanime.ru' + links[len(links) - stream_id]
             html = scraper.get(url).content
             url = kissanime_url(html)[0]
             title = get_title(html)
@@ -179,7 +179,7 @@ def kissanime_download_playlist(html,
                 exit(2)
             for x in range(
                     int(stream_id_range[2]), int(stream_id_range[0]) - 1, -1):
-                url = 'https://kissanime.to' + links[len(links) - x]
+                url = 'https://kissanime.ru' + links[len(links) - x]
                 html = scraper.get(url).content
                 url = kissanime_url(html)[0]
                 title = get_title(html)
@@ -199,7 +199,7 @@ def kissanime_download_playlist(html,
                     p.start()
     else:
         for idx, link in enumerate(links):
-            url = 'https://kissanime.to' + link
+            url = 'https://kissanime.ru' + link
             html = scraper.get(url).content
             print('dl-with:    you-get --format=' + str(len(links) - idx) +
                   ' [url]')
@@ -224,7 +224,7 @@ def kissanime_download_search(html,
     if 'id=' not in links[0].lower():
         for idx, link in enumerate(links):
             if (idx < 20):
-                url = 'https://kissanime.to' + link
+                url = 'https://kissanime.ru' + link
                 url_list.append(url)
                 print(str(idx + 1) + '. ' + url)
             else:
@@ -250,7 +250,7 @@ def kissanime_download_search(html,
                 kissanime_download(url_list[int(x) - 1], True, output_dir,
                                    merge, info_only, **kwargs)
     else:
-        url = 'https://kissanime.to/' + re.search(r'([^/].+)/Episode-',
+        url = 'https://kissanime.ru/' + re.search(r'([^/].+)/Episode-',
                                                   links[0]).group(1)
         kissanime_download(url, True, output_dir, merge, info_only, **kwargs)
 
@@ -267,6 +267,6 @@ def kissanime_url(html):
     return url_list
 
 
-site_info = "KissAnime.to"
+site_info = "KissAnime.ru"
 download = kissanime_download
 download_playlist = kissanime_download_playlist
